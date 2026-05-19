@@ -1,15 +1,18 @@
 public class Main {
   public static void main(String[] args) {
+    System.out.println("ПРИВЕТ! ПРОГРАММА ЗАПУЩЕНА.");// проверка экзешника, потом удалить!!!!
     TaskManager manager = new TaskManager();
 
-    manager.addTask("Запустить проект на Java для практики", "Высокий");
-    manager.addTask("Поиграть в Steam вечером", "Низкий");
-    manager.addTask("Распечатать справку об отсрочке", "Средний");
+    manager.addTask("Сделать ДЗ по Java", "Высокий");
+    manager.addTask("Купить молоко", "Низкий");
+
 
     manager.printAllTasks();
-
-    manager.completeTask(1);
-
+    manager.printTasksByPriority("Высокий");
+    manager.removeTask(1);
     manager.printAllTasks();
+
+    System.out.println("\nНажмите Enter, чтобы выйти...");
+    new java.util.Scanner(System.in).nextLine();
   }
 }

@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 
 public class TaskManager {
-    // Создать динамический список для хранения данных вроде.
     private ArrayList<Task> tasks = new ArrayList<>();
-    private int nextId = 1; // это если че Автоматический счетчик ID
+    private int nextId = 1;
 
     public void addTask(String title, String priority) {
         Task newTask = new Task(nextId, title, priority);
@@ -12,7 +11,6 @@ public class TaskManager {
         nextId++;
     }
 
-    // вывод на экран
     public void printAllTasks() {
         if (tasks.isEmpty()) {
             System.out.println("Ваш список задач пуст.");
@@ -25,7 +23,6 @@ public class TaskManager {
         System.out.println("--------------------------");
     }
 
-    // это нужно для отметки задачи как выполненной по её айдиии
     public void completeTask(int id) {
         for (Task task : tasks) {
             if (task.getId() == id) {
@@ -36,5 +33,22 @@ public class TaskManager {
         }
         System.out.println("Задача с ID " + id + " не найдена.");
     }
-}
 
+    public void removeTask(int id) {
+        boolean removed = tasks.removeIf(task -> task.getId() == id);
+        if (removed) {
+            System.out.println("Задача с ID " + id + " удалена.");
+        } else {
+            System.out.println("Задача с ID " + id + " не найдена.");
+        }
+    }
+
+    public void printTasksByPriority(String priority) {
+        System.out.println("\n--- Задачи с приоритетом: " + priority + " ---");
+        for (Task task : tasks) {
+            if (task.getPriority().equalsIgnoreCase(priority)) {
+                System.out.println(task);
+            }
+        }
+    }
+}
