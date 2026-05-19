@@ -1,18 +1,53 @@
+import java.util.Scanner;
+
 public class Main {
   public static void main(String[] args) {
-    System.out.println("ПРИВЕТ! ПРОГРАММА ЗАПУЩЕНА.");// проверка экзешника, потом удалить!!!!
     TaskManager manager = new TaskManager();
+    Scanner scanner = new Scanner(System.in);
+    boolean running = true;
 
-    manager.addTask("Сделать ДЗ по Java", "Высокий");
-    manager.addTask("Купить молоко", "Низкий");
+    System.out.println("=== МЕНЕДЖЕР ЗАДАЧ ЗАПУЩЕН ===");
 
+    while (running) {
+      System.out.println("\nВыберите действие:");
+      System.out.println("1 - Добавить задачу");
+      System.out.println("2 - Показать все задачи");
+      System.out.println("3 - Удалить задачу по ID");
+      System.out.println("4 - Выйти");
+      System.out.print("Ваш выбор: ");
 
-    manager.printAllTasks();
-    manager.printTasksByPriority("Высокий");
-    manager.removeTask(1);
-    manager.printAllTasks();
+      String choice = scanner.nextLine();
 
-    System.out.println("\nНажмите Enter, чтобы выйти...");
-    new java.util.Scanner(System.in).nextLine();
+      switch (choice) {
+        case "1":
+          System.out.print("Название: ");
+          String title = scanner.nextLine();
+          System.out.print("Приоритет (Высокий/Низкий): ");
+          String priority = scanner.nextLine();
+          manager.addTask(title, priority);
+          System.out.println(">> Задача добавлена.");
+          break;
+        case "2":
+          System.out.println("\n--- СПИСОК ЗАДАЧ ---");
+          manager.printAllTasks();
+          break;
+        case "3":
+          System.out.print("Введите ID задачи: ");
+          try {
+            int id = Integer.parseInt(scanner.nextLine());
+            manager.removeTask(id);
+          } catch (NumberFormatException e) {
+            System.out.println("Ошибка: ID должен быть числом!");
+          }
+          break;
+        case "4":
+          running = false;
+          System.out.println("Выход...");
+          break;
+        default:
+          System.out.println("Неверная команда, попробуйте снова.");
+      }
+    }
+    scanner.close();
   }
 }
