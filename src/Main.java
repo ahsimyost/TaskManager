@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
   public static void main(String[] args) {
     TaskManager manager = new TaskManager();
+    manager.loadTasksFromFile();
     Scanner scanner = new Scanner(System.in);
     boolean running = true;
 
@@ -20,9 +21,9 @@ public class Main {
 
       switch (choice) {
         case "1":
-          System.out.print("Название: ");
+          System.out.print("Название на английском!!  : ");
           String title = scanner.nextLine();
-          System.out.print("Приоритет (Высокий/Низкий): ");
+          System.out.print("Приоритет (High/low): ");
           String priority = scanner.nextLine();
           manager.addTask(title, priority);
           System.out.println(">> Задача добавлена.");
@@ -42,6 +43,7 @@ public class Main {
           break;
         case "4":
           running = false;
+          manager.saveTasksToFile();
           System.out.println("Выход...");
           break;
         default:
